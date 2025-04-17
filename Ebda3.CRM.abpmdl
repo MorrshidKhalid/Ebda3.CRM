@@ -1,0 +1,105 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "4.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "9.1.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "9.1.0",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Ebda3.CRM.Application": {
+      "path": "src/Ebda3.CRM.Application/Ebda3.CRM.Application.abppkg",
+      "folder": "src"
+    },
+    "Ebda3.CRM.Application.Tests": {
+      "path": "test/Ebda3.CRM.Application.Tests/Ebda3.CRM.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Ebda3.CRM.Domain.Shared": {
+      "path": "src/Ebda3.CRM.Domain.Shared/Ebda3.CRM.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "Ebda3.CRM.Application.Contracts": {
+      "path": "src/Ebda3.CRM.Application.Contracts/Ebda3.CRM.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Ebda3.CRM.HttpApi": {
+      "path": "src/Ebda3.CRM.HttpApi/Ebda3.CRM.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Ebda3.CRM.HttpApi.Client": {
+      "path": "src/Ebda3.CRM.HttpApi.Client/Ebda3.CRM.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Ebda3.CRM.Web": {
+      "path": "src/Ebda3.CRM.Web/Ebda3.CRM.Web.abppkg",
+      "folder": "src"
+    },
+    "Ebda3.CRM.Web.Tests": {
+      "path": "test/Ebda3.CRM.Web.Tests/Ebda3.CRM.Web.Tests.abppkg",
+      "folder": "test"
+    },
+    "Ebda3.CRM.EntityFrameworkCore.Tests": {
+      "path": "test/Ebda3.CRM.EntityFrameworkCore.Tests/Ebda3.CRM.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Ebda3.CRM.EntityFrameworkCore": {
+      "path": "src/Ebda3.CRM.EntityFrameworkCore/Ebda3.CRM.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Ebda3.CRM.TestBase": {
+      "path": "test/Ebda3.CRM.TestBase/Ebda3.CRM.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Ebda3.CRM.Domain.Tests": {
+      "path": "test/Ebda3.CRM.Domain.Tests/Ebda3.CRM.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Ebda3.CRM.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Ebda3.CRM.HttpApi.Client.ConsoleTestApp/Ebda3.CRM.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "Ebda3.CRM.DbMigrator": {
+      "path": "src/Ebda3.CRM.DbMigrator/Ebda3.CRM.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "Ebda3.CRM.Domain": {
+      "path": "src/Ebda3.CRM.Domain/Ebda3.CRM.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

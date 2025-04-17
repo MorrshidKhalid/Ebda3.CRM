@@ -1,0 +1,30 @@
+@page
+@using Ebda3.CRM.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<CRMResource> L
+@model Ebda3.CRM.Web.Pages.IndexModel
+
+@section scripts
+{
+    <abp-script src="/Pages/Categories/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Menu:Categories"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                <abp-button id="NewCategoryButton"
+                            text="@L["NewCategory"].Value"
+                            icon="plus"
+                            button-type="Primary" />
+            </abp-column>
+        </abp-row>
+
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="CategoriesTable"></abp-table>
+    </abp-card-body>
+</abp-card>

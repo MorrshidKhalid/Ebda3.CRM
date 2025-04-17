@@ -1,0 +1,21 @@
+@page
+@using Ebda3.CRM.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Ebda3.CRM.Web.Pages.Categories.CreateCategoryModalModel
+@inject IHtmlLocalizer<CRMResource> L
+
+@{
+    Layout = null;
+}
+
+<abp-dynamic-form abp-model="Category" asp-page="/Categories/CreateCategoryModal">
+    <abp-modal>
+        <abp-modal-header title="@L["NewCategory"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-form-content />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</abp-dynamic-form>

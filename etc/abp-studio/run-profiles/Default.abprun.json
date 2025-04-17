@@ -1,0 +1,15 @@
+﻿{
+  "applications": {
+    "Ebda3.CRM.Web": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44305",
+      "path": "../../../src/Ebda3.CRM.Web/Ebda3.CRM.Web.csproj",
+      "kubernetesService": ".*-web$",
+      "healthCheckEndpoint": "/health-status",
+      "healthUiEndpoint": "/health-ui",
+      "execution": {
+        "order": 2
+      }
+    }
+  }
+}
