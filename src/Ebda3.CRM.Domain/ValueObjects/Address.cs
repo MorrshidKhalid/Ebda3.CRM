@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Volo.Abp;
 using Volo.Abp.Domain.Values;
 
 namespace Ebda3.CRM.ValueObjects;
@@ -18,13 +19,10 @@ public class Address : ValueObject
 
     public Address(string street, string city, string state, string zipCode)
     {
-        bool isEmptyOrNull = !string.IsNullOrEmpty(street) || !string.IsNullOrEmpty(city) ||
-                             !string.IsNullOrEmpty(state) || !string.IsNullOrEmpty(zipCode);
-
-        if (isEmptyOrNull)
-        {
-            throw new ArgumentException("Address info cannot be empty or null");
-        }
+        Check.NotNullOrWhiteSpace(street, nameof(street));
+        Check.NotNullOrWhiteSpace(city, nameof(city));
+        Check.NotNullOrWhiteSpace(state, nameof(state));
+        Check.NotNullOrWhiteSpace(zipCode, nameof(zipCode));
         
         Street = street;
         City = city;

@@ -63,6 +63,10 @@ public class LeadConfiguration : IEntityTypeConfiguration<Lead>
         builder.Property(x => x.Source)
             .IsRequired();
         
+        builder.Property(x => x.AssignedTo)
+            .HasMaxLength(LeadConsts.MaxNameLength)
+            .IsRequired(false);
+        
         builder.ToTable(LeadConsts.TableName);
     }
 }
