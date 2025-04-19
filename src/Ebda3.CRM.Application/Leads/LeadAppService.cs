@@ -9,13 +9,13 @@ using Volo.Abp.Guids;
 
 namespace Ebda3.CRM.Leads;
 
-public class LeadsAppService : ApplicationService, ILeadsAppService
+public class LeadAppService : ApplicationService, ILeadAppService
 {
     private readonly IGuidGenerator _guidGenerator;
     private readonly IRepository<Lead, Guid> _repository;
     private readonly ILeadRepository _leadRepository;
 
-    public LeadsAppService(
+    public LeadAppService(
         IGuidGenerator guidGenerator, IRepository<Lead, Guid> repository,
         ILeadRepository leadRepository)
     {
@@ -49,7 +49,6 @@ public class LeadsAppService : ApplicationService, ILeadsAppService
         
         return dto;
     }
-
     public async Task<LeadDto> GetLeadById(Guid leadId)
     {
         Lead? foundedLead = null;
@@ -65,14 +64,12 @@ public class LeadsAppService : ApplicationService, ILeadsAppService
 
         return foundedLead == null ? new LeadDto() : ObjectMapper.Map<Lead, LeadDto>(foundedLead);
     }
-
     public async Task<List<LeadDto>> GetAllLeadsAsync()
     {
         var leads = await _leadRepository.GetAllAsync();
         
         return ObjectMapper.Map<List<Lead>, List<LeadDto>>(leads);
     }
-
     public async Task DeleteLeadByStatusAsync(LeadStatus status)
     {
         await _leadRepository.DeleteLeadByStatusAsync(status);

@@ -69,7 +69,7 @@ public class CRMMenuContributor : IMenuContributor
                     new ApplicationMenuItem(
                         CRMMenus.Contacts,
                         l["Menu:Contacts"],
-                        url: "~/"
+                        url: "/Leads"
                     )
                 )
                 .AddItem(
