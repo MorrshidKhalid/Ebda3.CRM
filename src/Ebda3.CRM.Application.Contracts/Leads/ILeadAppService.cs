@@ -9,5 +9,5 @@ namespace Ebda3.CRM.Leads;
 public interface ILeadAppService : IApplicationService
 {
     Task<LeadDto> CreateAsync(CreateUpdateLeadDto input);
-    Task<List<LeadDto>> GetAllLeadsAsync();
+    Task<PagedResultDto<LeadDto>> GetAllLeadsAsync();
 }

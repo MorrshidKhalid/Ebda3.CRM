@@ -35,7 +35,7 @@ public class LeadRepository : EfCoreRepository<CRMDbContext, Lead, Guid>, ILeadR
         return await dbContext.Leads.FindAsync(id);
     }
 
-    public async Task<List<Lead>> GetAllAsync()
+    public async Task<List<Lead>> FindAllAsync()
     {
         var dbContext = await GetDbContextAsync();
         

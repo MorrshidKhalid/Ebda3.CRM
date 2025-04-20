@@ -5,12 +5,12 @@ $(function () {
     var dataTable = $('#ProductsTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
             serverSide: true,
-            paging: true,
-            order: [[0, "asc"]],
+            paging: true, order: [[0, "asc"]],
             searching: false,
             scrollX: true,
-            ajax: abp.libs.datatables.createAjax(
-                ebda3.cRM.products.product.getListWithCategory),
+           
+            ajax: abp.libs.datatables.createAjax
+                (ebda3.cRM.products.product.getListWithCategory),
             columnDefs: [
                 {
                     title: l('Actions'),

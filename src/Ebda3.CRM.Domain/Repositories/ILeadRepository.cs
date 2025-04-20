@@ -12,7 +12,7 @@ public interface ILeadRepository : IRepository<Lead, Guid>
     Task DeleteLeadByStatusAsync(LeadStatus status);
     Task DeleteLeadBySourceAsync(LeadSource source);
     Task<Lead?> FindByIdAsync(Guid id);
-    Task<List<Lead>> GetAllAsync();
+    Task<List<Lead>> FindAllAsync();
     Task<List<Lead>> GetAllBySourceAsync(LeadSource source);
     Task<List<Lead>> GetAllByStatusAsync(LeadStatus status);
 }

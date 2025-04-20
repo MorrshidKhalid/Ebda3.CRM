@@ -76,10 +76,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Contacts\" />
     <Folder Include="Pages\Interactions\" />
-    <Folder Include="Pages\Orders\" />
+    <Folder Include="Pages\Leads\" />
     <Folder Include="Pages\Tasks\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Leads\Index.cshtml" />
   </ItemGroup>
 
 </Project>
