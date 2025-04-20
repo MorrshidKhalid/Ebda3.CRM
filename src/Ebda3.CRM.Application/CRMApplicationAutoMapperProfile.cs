@@ -15,5 +15,6 @@ public class CRMApplicationAutoMapperProfile : Profile
         CreateMap<CreateUpdateCategoryDto, Category>();
         CreateMap<Category, CategoryDto>();
         CreateMap<Lead, LeadDto>();
+        CreateMap<CreateUpdateLeadDto, Lead>();
     }
 }

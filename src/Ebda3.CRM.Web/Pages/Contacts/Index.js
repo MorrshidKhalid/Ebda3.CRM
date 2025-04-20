@@ -1,7 +1,8 @@
 $(function () {
    var l = abp.localization.getResource('CRM');
-   
-   var dataTable = $('#LeadsTable').DataTable(
+
+    // var editModal = new abp.ModalManager(abp.appPath + 'Contacts/EditContactModal');
+    var dataTable = $('#LeadsTable').DataTable(
        abp.libs.datatables.normalizeConfiguration({
           serverSide: true,
           paging: true,
@@ -12,6 +13,23 @@ $(function () {
            ajax: abp.libs.datatables.createAjax
                 (ebda3.cRM.leads.lead.getAllLeads),
           columnDefs: [
+              {
+                title: l('Actions'),
+                rowAction: {
+                    items: [
+                        {
+                            text: l('Edit'),
+                            action: function(data) {
+                                editModal.open({id: data.record.id })
+                            }
+                        },
+                        {
+                            text: l('Delete'),
+                            action: function(data) {}
+                        }
+                    ]
+                }  
+              },
               {
                   title: l('Full-Name'),
                   data: null,
@@ -73,5 +91,9 @@ $(function () {
         e.preventDefault();
         createModal.open();
     });
+
+    // editModal.onResult(function () {
+    //     dataTable.ajax.reload();
+    // })
     
 });

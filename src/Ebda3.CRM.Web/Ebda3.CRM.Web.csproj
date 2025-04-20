@@ -77,7 +77,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Interactions\" />
-    <Folder Include="Pages\Leads\" />
     <Folder Include="Pages\Tasks\" />
   </ItemGroup>
 

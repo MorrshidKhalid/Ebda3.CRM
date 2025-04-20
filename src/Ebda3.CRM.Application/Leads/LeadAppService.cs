@@ -58,21 +58,7 @@ public class LeadAppService : ApplicationService, ILeadAppService
         
         return dto;
     }
-    public async Task<LeadDto> GetLeadById(Guid leadId)
-    {
-        Lead? foundedLead = null;
-        try
-        {
-            foundedLead = await _leadRepository.FindByIdAsync(leadId);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
-       
-
-        return foundedLead == null ? new LeadDto() : ObjectMapper.Map<Lead, LeadDto>(foundedLead);
-    }
+    
     public async Task<PagedResultDto<LeadDto>> GetAllLeadsAsync()
     {
         var leads = await _leadRepository.FindAllAsync();
@@ -94,10 +80,36 @@ public class LeadAppService : ApplicationService, ILeadAppService
         
         return new PagedResultDto<LeadDto>(leads.Count, leadDtos);
     }
+    
+    public async Task<LeadDto> FindAsync(Guid leadId)
+    {
+        Lead? lead = await _leadRepository.FindByIdAsync(leadId);
+        if (lead == null)
+        {
+            return new LeadDto();
+        }
+        
+        LeadDto dto = ObjectMapper.Map<Lead, LeadDto>(lead);
+        dto.Street = lead.Address.Street;
+        dto.City = lead.Address.City;
+        dto.State = lead.Address.State;
+        dto.ZipCode = lead.Address.ZipCode;
+        
+        return dto;
+    }
+    
+    public async Task UpdateLeadAsync(Guid id, CreateUpdateLeadDto input)
+    {
+        Lead lead = await _repository.GetAsync(id);
+        
+        //ObjectMapper.Map(input, lead);
+    }
+    
     public async Task DeleteLeadByStatusAsync(LeadStatus status)
     {
         await _leadRepository.DeleteLeadByStatusAsync(status);
     }
+    
     public async Task DeleteLeadBySourceAsync(LeadSource source)
     {
         await _leadRepository.DeleteLeadBySourceAsync(source);
