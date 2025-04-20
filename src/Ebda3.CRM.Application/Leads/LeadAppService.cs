@@ -17,22 +17,23 @@ public class LeadAppService : ApplicationService, ILeadAppService
     private readonly IGuidGenerator _guidGenerator;
     private readonly IRepository<Lead, Guid> _repository;
     private readonly ILeadRepository _leadRepository;
-    private readonly LeadDomainServiceImpl _leadDomainServiceImpl;
+    private readonly LeadManager _leadManager;
 
     public LeadAppService(
-        IGuidGenerator guidGenerator, IRepository<Lead, Guid> repository,
+        IGuidGenerator guidGenerator,
+        IRepository<Lead, Guid> repository,
         ILeadRepository leadRepository,
-        LeadDomainServiceImpl domainServiceImpl)
+        LeadManager manager)
     {
         _guidGenerator = guidGenerator;
         _repository = repository;
         _leadRepository = leadRepository;
-        _leadDomainServiceImpl = domainServiceImpl;
+        _leadManager = manager;
     }
 
     public async Task<LeadDto> CreateAsync(CreateUpdateLeadDto input)
     {
-        await _leadDomainServiceImpl.IsEmailTaken(input.Email); //Pure business logic
+        await _leadManager.IsEmailTaken(input.Email); //Pure business logic
         
         var address = new Address(input.Street, input.City, input.State, input.ZipCode);
         var lead = new Lead(

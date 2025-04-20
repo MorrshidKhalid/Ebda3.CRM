@@ -64,5 +64,14 @@ $(function () {
           
        })
    );
+   
+   var createModal = new abp.ModalManager(abp.appPath + 'Contacts/CreateLeadModal');
+   createModal.onResult(function () {
+       dataTable.ajax.reload();
+   });
+    $('#BtnNewContact').click(function (e) {
+        e.preventDefault();
+        createModal.open();
+    });
     
 });

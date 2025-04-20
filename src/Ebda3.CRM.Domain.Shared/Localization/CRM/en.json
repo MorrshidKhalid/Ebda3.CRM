@@ -2,6 +2,7 @@
   "Culture": "en",
   "Texts": {
     "AppName": "CRM",
+    "ContactsIndex": "Contacts",
     "Menu:Home": "Home",
     "Menu:CRM": "CRM",
     "Menu:ManageProducts": "Manage Products",
@@ -38,6 +39,8 @@
     "Enum:Status.4": "Rejected",
     "CreationTime": "Creation-time",
     "NewProduct": "New Product",
+    "AddContact": "Enter Contact Info",
+    "BtnLead": "New Contact",
     "NewCategory": "Add Category",
     "Category": "Category",
     "IsFreeCargo": "Free Cargo",

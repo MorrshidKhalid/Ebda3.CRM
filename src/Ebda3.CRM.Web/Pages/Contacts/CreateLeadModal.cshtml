@@ -1,0 +1,23 @@
+@page
+@using Ebda3.CRM.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Ebda3.CRM.Web.Pages.Contacts.CreateLeadModal
+@inject IHtmlLocalizer<CRMResource> L
+
+@{
+    Layout = null;
+}
+
+
+<abp-dynamic-form abp-model="Contacts" asp-page="/Contacts/CreateLeadModal">
+    <abp-modal>
+        <abp-modal-header title="@L["AddContact"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-form-content />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</abp-dynamic-form>
+

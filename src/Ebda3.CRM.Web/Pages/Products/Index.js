@@ -71,7 +71,7 @@ $(function () {
         })
     );
 
-    var createModal = new abp.ModalManager(abp.appPath + 'Products/CreateProductModal');
+    var createModal = new abp.ModalManager(abp.appPath + 'Contacts/CreateProductModal');
     createModal.onResult(function () {
         dataTable.ajax.reload();
     });
