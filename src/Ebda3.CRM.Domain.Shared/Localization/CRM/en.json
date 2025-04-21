@@ -58,6 +58,8 @@
     "ProductDeletionConfirmationMessage": "Are you sure you want to delete this product: {0}?",
     "LeadDeletionConfirmationMessage": "Are you sure you want to delete this Lead: {0}?",
     "CategoryDeletionConfirmationMessage": "Are you sure you want to delete this category: {0}?",
-    "SuccessfullyDeleted": "Deleted successfully!"
+    "SuccessfullyDeleted": "Deleted successfully!",
+    "CRM:00001": "The email is already taken: {emailAddress}",
+    "CRM:00002": "The phone number is already taken: {phoneNumber}"
   }
 }

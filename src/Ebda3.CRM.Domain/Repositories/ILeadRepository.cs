@@ -12,4 +12,6 @@ public interface ILeadRepository : IRepository<Lead, Guid>
     Task DeleteLeadBySourceAsync(LeadSource source);
     Task<List<Lead>> GetAllBySourceAsync(LeadSource source);
     Task<List<Lead>> GetAllByStatusAsync(LeadStatus status);
+    
+    
 }
