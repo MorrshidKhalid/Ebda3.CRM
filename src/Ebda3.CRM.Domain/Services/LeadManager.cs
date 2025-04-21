@@ -44,6 +44,15 @@ public class LeadManager : DomainService
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="values"></param>
+    /// <param name="contactInfo"></param>
+    /// <param name="address"></param>
+    /// <param name="source"></param>
+    /// <param name="status"></param>
+    /// <returns></returns>
     public async Task<Lead> CreateAsync(
         string[] values, ContactInfo contactInfo, Address address,
         LeadSource source, LeadStatus status)
@@ -52,8 +61,8 @@ public class LeadManager : DomainService
         Check.NotNull(contactInfo, nameof(contactInfo));
         Check.NotNull(address, nameof(address));
         Check.NotNull(contactInfo, nameof(contactInfo));
-        Check.Positive((int)source, nameof(source));
-        Check.Positive((int)status, nameof(status));
+        Check.Range((int)source, nameof(source), LeadConsts.MinEnumValue, LeadConsts.MaxEnumValue);
+        Check.Range((int)status, nameof(status), LeadConsts.MinEnumValue, LeadConsts.MaxEnumValue);
         await PreventDuplicateEmailAndPhone([contactInfo.Email, contactInfo.PhoneNumber]);
 
         return new Lead(

@@ -1,55 +1,62 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Ebda3.CRM.Repositories;
 using Ebda3.CRM.Services;
 using Ebda3.CRM.ValueObjects;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.Guids;
 
 namespace Ebda3.CRM.Leads;
 
 public class LeadAppService : CRMAppService, ILeadAppService
 {
-    private readonly IGuidGenerator _guidGenerator;
     private readonly IRepository<Lead, Guid> _repository;
     private readonly LeadManager _leadManager;
+    ILeadRepository _leadRepository;
 
-    public LeadAppService(
-        IGuidGenerator guidGenerator,
-        IRepository<Lead, Guid> repository,
-        LeadManager manager)
+    public LeadAppService(IRepository<Lead, Guid> repository, LeadManager manager, ILeadRepository leadRepository)
     {
-        _guidGenerator = guidGenerator;
         _repository = repository;
         _leadManager = manager;
+        _leadRepository = leadRepository;
     }
 
     public async Task<LeadDto> CreateAsync(CreateUpdateLeadDto input)
     {
-        await _leadManager.PreventDuplicateEmailAndPhone([input.Email, input.Phone]); //Pure business logic
+
+        LeadDto dto;
+        try
+        {
+            string[] values = [input.FirstName, input.LastName, input.Company, input.Industry];
+            Address address = new Address(input.Street, input.City, input.State, input.ZipCode);
+            ContactInfo contactInfo = new ContactInfo(input.Phone, input.Email);
         
-        var address = new Address(input.Street, input.City, input.State, input.ZipCode);
-        var contactInfo = new ContactInfo(input.Phone, input.Email);
-        var lead = new Lead(
-            id: _guidGenerator.Create(),
-            firstName: input.FirstName,
-            lastName: input.LastName,
-            contactInfo: contactInfo,
-            address: address,
-            company: input.Company,
-            industry: input.Industry,
-            source: input.Source,
-            status: input.Status
-        );
+            Lead lead = await _leadManager.CreateAsync(
+                values,
+                contactInfo,
+                address,
+                input.Source,
+                input.Status);
         
-        var inserted = await _repository.InsertAsync(lead);
-        var dto = ObjectMapper.Map<Lead, LeadDto>(inserted);
-        dto.Street = inserted.Address.Street;
-        dto.City = inserted.Address.City;
-        dto.State = inserted.Address.State;
-        dto.ZipCode = inserted.Address.ZipCode;
         
+            dto = ObjectMapper.Map<Lead, LeadDto>(await _repository.InsertAsync(lead));
+        
+            dto.Email = contactInfo.Email;
+            dto.Phone = contactInfo.PhoneNumber;
+            dto.Street = address.Street;
+            dto.City = address.City;
+            dto.State = address.State;
+            dto.ZipCode = address.ZipCode;
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
+        }
+        
+
         return dto;
     }
     

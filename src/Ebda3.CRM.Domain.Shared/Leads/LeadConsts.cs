@@ -11,5 +11,7 @@ public static class LeadConsts
     public const int MaxCompanyLength = 55;
     public const int MaxIndustryLength = 68;
     public const int MaxPhoneLength = 13;
+    public const int MinEnumValue = 0;
+    public const int MaxEnumValue = 255;
     public const string TableName = "Lead";
 }

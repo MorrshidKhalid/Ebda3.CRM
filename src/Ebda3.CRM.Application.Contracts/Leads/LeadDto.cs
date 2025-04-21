@@ -17,4 +17,7 @@ public class LeadDto : FullAuditedEntityDto<Guid>
     public string Industry { get; set; }
     public LeadSource Source { get; set; }
     public LeadStatus Status { get; set; }
+
+
+    
 }

@@ -1,9 +1,11 @@
 using System;
+using System.Runtime.CompilerServices;
 using Ebda3.CRM.ValueObjects;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Ebda3.CRM.Leads;
+
 
 public class Lead : FullAuditedAggregateRoot<Guid>
 {

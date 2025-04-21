@@ -41,4 +41,5 @@ public class LeadRepository : EfCoreRepository<CRMDbContext, Lead, Guid>, ILeadR
         
         return dbContext.Leads.Where(x => x.Status == status).ToList();
     }
+    
 }
