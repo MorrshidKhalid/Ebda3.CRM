@@ -14,7 +14,7 @@ public class Lead : FullAuditedAggregateRoot<Guid>
     public string Company { get; private set; }
     public string Industry { get; private set; }
     public LeadSource Source { get; private set; }
-    public LeadStatus Status { get; private set; }
+    public LeadStatus Status { get; private set; } = LeadStatus.New;
     public string? AssignedTo { get; private set; }
 
     protected Lead()
@@ -29,6 +29,7 @@ public class Lead : FullAuditedAggregateRoot<Guid>
     {
         FirstName = firstName;
         LastName = lastName;
+        ContactInfo = contactInfo;
         Address = address;
         Company = company;
         Industry = industry;

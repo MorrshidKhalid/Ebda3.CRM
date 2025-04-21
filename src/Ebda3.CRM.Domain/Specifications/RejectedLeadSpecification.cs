@@ -9,6 +9,6 @@ public class RejectedLeadSpecification : Specification<Lead>
 {
     public override Expression<Func<Lead, bool>> ToExpression()
     {
-        return lead => lead.Status == LeadStatus.Rejected;
+        throw new NotImplementedException("Rejected leads Specification are not implemented yet.");
     }
 }

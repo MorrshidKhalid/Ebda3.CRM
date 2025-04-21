@@ -17,12 +17,24 @@ public class LeadManager : DomainService
     {
         _leadRepository = leadRepository;
     }
-    public async Task PreventDuplicateEmail(string email)
+    
+    /// <summary>
+    /// To Make suer a new lead email, or phone number is not exists in the database.
+    /// </summary>
+    /// <param name="values">[0] to email, [1] for phone number</param>
+    /// <exception cref="UserFriendlyException">To inform that the email or phone number is already taken</exception>
+    public async Task PreventDuplicateEmailAndPhone(string[] values)
     {
-        bool isTaken = await _leadRepository.AnyAsync(x => x.ContactInfo.Email == email);
-        if (isTaken)
+        bool isEmailTaken = await _leadRepository.AnyAsync(x => x.ContactInfo.Email == values[0]);
+        if (isEmailTaken)
         {
             throw new UserFriendlyException("Email is taken");
+        }
+        
+        bool isPhoneTaken = await _leadRepository.AnyAsync(x => x.ContactInfo.PhoneNumber == values[1]);
+        if (isPhoneTaken)
+        {
+            throw new UserFriendlyException("Phone number is taken");
         }
     }
 }

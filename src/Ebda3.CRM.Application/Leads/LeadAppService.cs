@@ -27,7 +27,7 @@ public class LeadAppService : CRMAppService, ILeadAppService
 
     public async Task<LeadDto> CreateAsync(CreateUpdateLeadDto input)
     {
-        await _leadManager.PreventDuplicateEmail(input.Email); //Pure business logic
+        await _leadManager.PreventDuplicateEmailAndPhone([input.Email, input.Phone]); //Pure business logic
         
         var address = new Address(input.Street, input.City, input.State, input.ZipCode);
         var contactInfo = new ContactInfo(input.Phone, input.Email);
@@ -53,7 +53,7 @@ public class LeadAppService : CRMAppService, ILeadAppService
         return dto;
     }
     
-    // Used in js file via (Dynamic JS Proxies)
+    //GetAllLeads Used in js file via (Dynamic JS Proxies)
     public async Task<PagedResultDto<LeadDto>> GetAllLeadsAsync()
     {
         var leads = await _repository.GetListAsync();
@@ -96,16 +96,14 @@ public class LeadAppService : CRMAppService, ILeadAppService
     {
         var lead = await _repository.GetAsync(id);
         UpdateLeadMembers(lead, input);
-
-        try
-        {
-            ObjectMapper.Map(input, lead);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"error msg: {e.Message}");
-        }
         
+        ObjectMapper.Map(input, lead);
+    }
+
+    //DeleteLead Used in js file via (Dynamic JS Proxies)
+    public async Task DeleteLeadAsync(Guid id)
+    {
+        await _repository.DeleteAsync(id);
     }
 
     private void UpdateLeadMembers(Lead lead, CreateUpdateLeadDto input)

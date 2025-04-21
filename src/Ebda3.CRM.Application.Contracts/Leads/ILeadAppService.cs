@@ -12,4 +12,6 @@ public interface ILeadAppService : IApplicationService
     Task<PagedResultDto<LeadDto>> GetAllLeadsAsync();
     Task<LeadDto> FindLeadDtoAsync(Guid leadId);
     Task UpdateLeadAsync(Guid id, CreateUpdateLeadDto input);
+    
+    Task DeleteLeadAsync(Guid id);
 }

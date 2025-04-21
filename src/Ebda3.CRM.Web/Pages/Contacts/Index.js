@@ -26,7 +26,17 @@ $(function () {
                         },
                         {
                             text: l('Delete'),
-                            action: function(data) {}
+                            confirmMessage: function (data) {
+                                return l('LeadDeletionConfirmationMessage',
+                                    data.record.firstName + ' ' + data.record.lastName);
+                            },
+                            action: function(data) {
+                                ebda3.cRM.leads.lead.deleteLead(data.record.id)
+                                    .then(function() {
+                                        abp.message.info(l('SuccessfullyDeleted'));
+                                        dataTable.ajax.reload();
+                                    })
+                            }
                         }
                     ]
                 }  

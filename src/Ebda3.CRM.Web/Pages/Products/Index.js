@@ -29,8 +29,7 @@ $(function () {
                                         data.record.name);
                                 },
                                 action: function(data) {
-                                    ebda3.cRM.products.product
-                                        .delete(data.record.id)
+                                    ebda3.cRM.products.product.delete(data.record.id)
                                         .then(function() {
                                             abp.notify.info(l('SuccessfullyDeleted'));
                                             dataTable.ajax.reload();
