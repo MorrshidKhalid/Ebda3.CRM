@@ -29,7 +29,7 @@ public class Address : ValueObject
         State = state;
         ZipCode = zipCode;
     }
-
+    
     protected override IEnumerable<object> GetAtomicValues()
     {
         //(ToLower) to case-insensitive comparison

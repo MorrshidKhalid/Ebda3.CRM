@@ -18,13 +18,6 @@ public class LeadConfiguration : IEntityTypeConfiguration<Lead>
         builder.Property(x => x.LastName)
             .HasMaxLength(LeadConsts.MaxNameLength)
             .IsRequired();
-        
-        builder.Property(x => x.Email)
-            .HasMaxLength(LeadConsts.MaxEmailLength)
-            .IsRequired();
-        
-        builder.Property(x => x.Phone)
-            .HasMaxLength(LeadConsts.MaxPhoneLength);
 
         builder.OwnsOne(p => p.Address, a =>
         {
@@ -49,7 +42,20 @@ public class LeadConfiguration : IEntityTypeConfiguration<Lead>
                 .IsRequired(false);
         });
         
-        builder.Property(x => x.Camponey)
+        builder.OwnsOne(p => p.ContactInfo, c =>
+        {
+            c.Property(x => x.Email)
+                .HasColumnName("Email")
+                .HasMaxLength(LeadConsts.MaxEmailLength)
+                .IsRequired();
+            
+            c.Property(x => x.PhoneNumber)
+                .HasColumnName("PhoneNumber")
+                .HasMaxLength(LeadConsts.MaxPhoneLength)
+                .IsRequired();
+        });
+        
+        builder.Property(x => x.Company)
             .HasMaxLength(LeadConsts.MaxCompanyLength)
             .IsRequired();
         

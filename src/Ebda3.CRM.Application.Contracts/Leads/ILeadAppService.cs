@@ -10,6 +10,6 @@ public interface ILeadAppService : IApplicationService
 {
     Task<LeadDto> CreateAsync(CreateUpdateLeadDto input);
     Task<PagedResultDto<LeadDto>> GetAllLeadsAsync();
-    Task<LeadDto> FindAsync(Guid leadId);
+    Task<LeadDto> FindLeadDtoAsync(Guid leadId);
     Task UpdateLeadAsync(Guid id, CreateUpdateLeadDto input);
 }

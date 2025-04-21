@@ -19,5 +19,6 @@ public class CRMWebAutoMapperProfile : Profile
         CreateMap<CreateEditCategoryViewModel, Category>();
         CreateMap<CreateEditContactsViewModel, CreateUpdateLeadDto>();
         CreateMap<LeadDto, CreateEditContactsViewModel>();
+        CreateMap<CreateEditContactsViewModel, Lead>();
     }
 }

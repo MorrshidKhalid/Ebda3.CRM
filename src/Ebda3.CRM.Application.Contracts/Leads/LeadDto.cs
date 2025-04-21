@@ -13,7 +13,7 @@ public class LeadDto : FullAuditedEntityDto<Guid>
     public string City { get; set; }
     public string State { get; set; }
     public string ZipCode { get; set; }
-    public string Camponey { get; set; }
+    public string Company { get; set; }
     public string Industry { get; set; }
     public LeadSource Source { get; set; }
     public LeadStatus Status { get; set; }

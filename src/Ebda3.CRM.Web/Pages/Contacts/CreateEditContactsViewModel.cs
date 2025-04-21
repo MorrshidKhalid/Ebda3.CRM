@@ -39,7 +39,7 @@ public class CreateEditContactsViewModel
     
     [Required]
     [MaxLength(LeadConsts.MaxCompanyLength)]
-    public string Camponey { get; set; }
+    public string Company { get; set; }
     
     [Required]
     [MaxLength(LeadConsts.MaxIndustryLength)]

@@ -83,4 +83,5 @@ $(function () {
     editModal.onResult(function () {
         dataTable.ajax.reload();
     })
+        
 });

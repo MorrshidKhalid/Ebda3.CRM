@@ -1,8 +1,8 @@
 $(function () {
    var l = abp.localization.getResource('CRM');
 
-    // var editModal = new abp.ModalManager(abp.appPath + 'Contacts/EditContactModal');
-    var dataTable = $('#LeadsTable').DataTable(
+   var editModal = new abp.ModalManager(abp.appPath + 'Contacts/EditContactModal');
+   var dataTable = $('#LeadsTable').DataTable(
        abp.libs.datatables.normalizeConfiguration({
           serverSide: true,
           paging: true,
@@ -20,7 +20,8 @@ $(function () {
                         {
                             text: l('Edit'),
                             action: function(data) {
-                                editModal.open({id: data.record.id })
+                                editModal.open({ id: data.record.id })
+                                //abp.notify.success("result");
                             }
                         },
                         {
@@ -46,8 +47,8 @@ $(function () {
                   data: 'phone'
               },
               {
-                  title: l('Camponey'),
-                  data: 'camponey'
+                  title: l('Company'),
+                  data: 'company'
               },
               {
                   title: l('Industry'),
@@ -91,9 +92,9 @@ $(function () {
         e.preventDefault();
         createModal.open();
     });
-
-    // editModal.onResult(function () {
-    //     dataTable.ajax.reload();
-    // })
     
+    //To Update the data.
+    editModal.onResult(function () {
+        dataTable.ajax.reload();
+    })
 });

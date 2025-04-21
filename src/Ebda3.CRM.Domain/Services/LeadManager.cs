@@ -17,22 +17,12 @@ public class LeadManager : DomainService
     {
         _leadRepository = leadRepository;
     }
-
-    public async Task IsEmailTaken(string email)
+    public async Task PreventDuplicateEmail(string email)
     {
-        bool isTaken = await _leadRepository.AnyAsync(x => x.Email == email);
+        bool isTaken = await _leadRepository.AnyAsync(x => x.ContactInfo.Email == email);
         if (isTaken)
         {
             throw new UserFriendlyException("Email is taken");
         }
-    }
-    public async Task<List<Lead>> FindRejectedLeads()
-    {
-        IQueryable<Lead> queryable  = await _leadRepository.GetQueryableAsync();
-        queryable = queryable .Where(
-            new RejectedLeadSpecification().ToExpression()
-            );
-
-        return await AsyncExecuter.ToListAsync(queryable);
     }
 }

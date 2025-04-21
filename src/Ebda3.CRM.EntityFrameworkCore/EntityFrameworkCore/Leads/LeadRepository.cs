@@ -12,36 +12,22 @@ namespace Ebda3.CRM.EntityFrameworkCore.Leads;
 
 public class LeadRepository : EfCoreRepository<CRMDbContext, Lead, Guid>, ILeadRepository
 {
-    public LeadRepository(IDbContextProvider<CRMDbContext> dbContextProvider) : base(dbContextProvider)
+    public LeadRepository(IDbContextProvider<CRMDbContext> dbContextProvider) 
+        : base(dbContextProvider)
     {
     }
 
     public async Task DeleteLeadByStatusAsync(LeadStatus status)
     {
         var dbContext = await GetDbContextAsync();
-        await dbContext.Database.ExecuteSqlRawAsync($"DELETE FROM Lead WHERE Status = {(int)status}");
+        await dbContext.Database.ExecuteSqlAsync($"DELETE FROM Lead WHERE Status = {(int)status}");
     }
     
     public async Task DeleteLeadBySourceAsync(LeadSource source)
     {
         var dbContext = await GetDbContextAsync();
-        await dbContext.Database.ExecuteSqlRawAsync($"DELETE FROM Lead WHERE Source = {(int)source}");
+        await dbContext.Database.ExecuteSqlAsync($"DELETE FROM Lead WHERE Source = {(int)source}");
     }
-
-    public async Task<Lead?> FindByIdAsync(Guid id)
-    {
-        var dbContext = await GetDbContextAsync();
-        
-        return await dbContext.Leads.FindAsync(id);
-    }
-
-    public async Task<List<Lead>> FindAllAsync()
-    {
-        var dbContext = await GetDbContextAsync();
-        
-        return dbContext.Leads.Select(x => x).ToList();
-    }
-
     public async Task<List<Lead>> GetAllBySourceAsync(LeadSource source)
     {
         var dbContext = await GetDbContextAsync();
