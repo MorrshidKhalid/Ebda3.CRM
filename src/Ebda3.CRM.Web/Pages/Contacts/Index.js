@@ -37,6 +37,12 @@ $(function () {
                                         dataTable.ajax.reload();
                                     })
                             }
+                        },
+                        {
+                            text: l('Assign'),
+                            action: function(data) {
+                                
+                            }
                         }
                     ]
                 }  

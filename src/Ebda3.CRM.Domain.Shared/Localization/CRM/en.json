@@ -16,7 +16,7 @@
     "Welcome": "Welcome",
     "Permission:Crm": "CRM",
     "Permission:Product": "Product Management",
-    "Permission:Products.View": "Get product/(s)",
+    "Permission:Products.View": "View product list",
     "Permission:Products.Create": "Creating new product",
     "Permission:Products.Edit": "Editing the product",
     "Permission:Products.Delete": "Deleting the product",

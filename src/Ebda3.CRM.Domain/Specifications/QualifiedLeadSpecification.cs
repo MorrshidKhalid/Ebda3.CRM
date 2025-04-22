@@ -5,10 +5,10 @@ using Volo.Abp.Specifications;
 
 namespace Ebda3.CRM.Specifications;
 
-public class RejectedLeadSpecification : Specification<Lead>
+public class QualifiedLeadSpecification : Specification<Lead>
 {
     public override Expression<Func<Lead, bool>> ToExpression()
     {
-        throw new NotImplementedException("Rejected leads Specification are not implemented yet.");
+        return l => l.Status == LeadStatus.Qualified;
     }
 }

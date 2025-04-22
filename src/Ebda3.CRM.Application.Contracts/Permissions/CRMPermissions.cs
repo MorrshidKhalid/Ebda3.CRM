@@ -19,4 +19,9 @@ public static class CRMPermissions
         public const string Delete = Default + ".Delete";
         public const string Edit = Default + ".Edit";
     }
+    
+    public static class Contacts
+    {
+        
+    }
 }

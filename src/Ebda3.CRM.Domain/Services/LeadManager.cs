@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Ebda3.CRM.Exceptions;
 using Ebda3.CRM.Leads;
-using Ebda3.CRM.Specifications;
 using Ebda3.CRM.ValueObjects;
 using Volo.Abp;
 using Volo.Abp.Domain.Repositories;
@@ -15,6 +12,7 @@ namespace Ebda3.CRM.Services;
 public class LeadManager : DomainService
 {
     private readonly IRepository<Lead, Guid> _leadRepository;
+    
     public LeadManager(IRepository<Lead, Guid> leadRepository)
     {
         _leadRepository = leadRepository;

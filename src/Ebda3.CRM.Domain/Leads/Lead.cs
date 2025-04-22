@@ -18,6 +18,7 @@ public class Lead : FullAuditedAggregateRoot<Guid>
     public LeadSource Source { get; private set; }
     public LeadStatus Status { get; private set; } = LeadStatus.New;
     public string? AssignedTo { get; private set; }
+    
 
     protected Lead()
     {
