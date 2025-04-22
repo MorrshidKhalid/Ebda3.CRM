@@ -50,11 +50,11 @@ $(function () {
               },
               {
                   title: l('Email'),
-                  data: 'email'
+                  data: 'contactInfo.email',
               },
               {
                   title: l('Phone'),
-                  data: 'phone'
+                  data: 'contactInfo.phoneNumber'
               },
               {
                   title: l('Company'),
@@ -82,12 +82,12 @@ $(function () {
                   title: l('Address'),
                   data: null,
                   render: function (data, type, row) {
-                      return row.city + ', ' + row.state + ', ' + row.street 
+                      return row.address.city + ', ' + row.address.state + ', ' + row.address.street 
                   }
               },
               {
                   title: l('Zip-Code'),
-                  data: 'zipCode'
+                  data: 'address.zipCode',
               }  
           ]
           

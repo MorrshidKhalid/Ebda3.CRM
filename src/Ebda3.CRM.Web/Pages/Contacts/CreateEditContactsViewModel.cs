@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Ebda3.CRM.Leads;
+using Ebda3.CRM.ValueObjects;
 
 namespace Ebda3.CRM.Web.Pages.Contacts;
 

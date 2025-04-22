@@ -24,14 +24,15 @@ public class Lead : FullAuditedAggregateRoot<Guid>
         //Required for EF Core.
     }
 
-    public Lead(Guid id,  string firstName, string lastName,
+    internal Lead(Guid id,  string firstName, string lastName,
         ContactInfo contactInfo, Address address,
         string company, string industry, LeadSource source,
         LeadStatus status, string? assignedTo = null) : base(id)
     {
         FirstName = firstName;
         LastName = lastName;
-        ContactInfo = contactInfo;
+        SetEmail(contactInfo.Email);
+        SetPhoneNumber(contactInfo.PhoneNumber);
         Address = address;
         Company = company;
         Industry = industry;
@@ -58,12 +59,32 @@ public class Lead : FullAuditedAggregateRoot<Guid>
         LastName = inputLastName;
     }
 
-    public void UpdateContacts(ContactInfo info)
+    internal Lead ChangeEmail(string newEmail)
     {
-        //Replace with (info) to keep it immutable.
-        ContactInfo = info;
+        SetEmail(newEmail);
+        return this;
+    }
+    
+    internal Lead ChangePhoneNumber(string newPhoneNumber)
+    {
+        SetPhoneNumber(newPhoneNumber);
+        return this;
     }
 
+    private void SetEmail(string newEmail)
+    {
+        Check.Length(newEmail, nameof(newEmail), LeadConsts.MaxEmailLength);
+        Check.NotNullOrWhiteSpace(newEmail, nameof(newEmail), LeadConsts.MaxEmailLength);
+        ContactInfo.Email = newEmail;
+    }
+    
+    private void SetPhoneNumber(string newPhoneNumber)
+    {
+        Check.Length(newPhoneNumber, nameof(newPhoneNumber), LeadConsts.MaxPhoneLength);
+        Check.NotNullOrWhiteSpace(newPhoneNumber, nameof(newPhoneNumber), LeadConsts.MaxPhoneLength);
+        ContactInfo.PhoneNumber = newPhoneNumber;
+    }
+    
     public void UpdateCompanyAndIndustry(string inputCompany, string inputIndustry)
     {
         Company = inputCompany;

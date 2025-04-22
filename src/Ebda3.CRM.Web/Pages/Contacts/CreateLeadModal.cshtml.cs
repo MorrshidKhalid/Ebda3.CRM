@@ -24,9 +24,8 @@ public class CreateLeadModal : CRMPageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-       var result =  await _leadAppService.CreateAsync(
-            ObjectMapper.Map<CreateEditContactsViewModel, CreateUpdateLeadDto>(Contacts)
-            );
+       await _leadAppService
+           .CreateAsync(ObjectMapper.Map<CreateEditContactsViewModel, CreateUpdateLeadDto>(Contacts));
         
         return NoContent();
     }

@@ -7,8 +7,8 @@ namespace Ebda3.CRM.ValueObjects;
 
 public class ContactInfo : ValueObject
 {
-    public string PhoneNumber { get; }
-    public string Email { get; }
+    public string PhoneNumber { get; set; }
+    public string Email { get; set; }
 
     protected ContactInfo()
     {

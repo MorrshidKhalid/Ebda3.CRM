@@ -14,45 +14,41 @@ namespace Ebda3.CRM.Services;
 
 public class LeadManager : DomainService
 {
-    private const string NumberPlaceHolder = "00000";
-    private const string EmailPlaceHolder = "em@email.com";
-    
     private readonly IRepository<Lead, Guid> _leadRepository;
     public LeadManager(IRepository<Lead, Guid> leadRepository)
     {
         _leadRepository = leadRepository;
     }
     
-    /// <summary>
-    /// To Make suer a new lead email, or phone number is not exists in the database.
-    /// </summary>
-    /// <param name="values">[0] to email, [1] for phone number</param>
-    /// <exception cref="EmailTakenException">To inform that the email is already taken</exception>
-    /// <exception cref="PhoneNumberTakenException">To inform that the phone number is already taken</exception>
-    public async Task PreventDuplicateEmailAndPhone(string[] values)
+    public async Task PreventDuplicateEmail(string email)
     {
-        bool isEmailTaken = await _leadRepository.AnyAsync(x => x.ContactInfo.Email == values[0]);
+        bool isEmailTaken = await _leadRepository.AnyAsync(x => x.ContactInfo.Email == email);
         if (isEmailTaken)
         {
-            throw new EmailTakenException(values[0]);
-        }
-        
-        bool isPhoneTaken = await _leadRepository.AnyAsync(x => x.ContactInfo.PhoneNumber == values[1]);
-        if (isPhoneTaken)
-        {
-            throw new PhoneNumberTakenException(values[1]);
+            throw new EmailTakenException(email);
         }
     }
 
+    public async Task PreventDuplicatePhone(string phone)
+    {
+        bool isPhoneTaken = await _leadRepository.AnyAsync(x => x.ContactInfo.PhoneNumber == phone);
+        if (isPhoneTaken)
+        {
+            throw new PhoneNumberTakenException(phone);
+        }
+        
+    }
+    
     /// <summary>
-    /// 
+    /// To Make suer a new lead email, and phone number is not exists in the database.
     /// </summary>
-    /// <param name="values"></param>
-    /// <param name="contactInfo"></param>
-    /// <param name="address"></param>
-    /// <param name="source"></param>
-    /// <param name="status"></param>
-    /// <returns></returns>
+    /// <param name="values">[0] to email, [1] for phone number</param>
+    public async Task PreventDuplicateEmailAndPhone(string[] values)
+    {
+        await PreventDuplicateEmail(values[0]);
+        await PreventDuplicatePhone(values[1]);
+    }
+    
     public async Task<Lead> CreateAsync(
         string[] values, ContactInfo contactInfo, Address address,
         LeadSource source, LeadStatus status)
@@ -78,23 +74,32 @@ public class LeadManager : DomainService
             );
     }
 
-    public async Task ChangeEmail(Lead lead, string newEmail)
+    public async Task ChangeEmailAsync(Lead lead, string newEmail)
     {
         Check.NotNull(lead, nameof(lead));
         Check.NotNullOrWhiteSpace(newEmail, nameof(newEmail));
 
-        await PreventDuplicateEmailAndPhone([newEmail, NumberPlaceHolder]);
-        
-        lead.UpdateContacts(new ContactInfo(lead.ContactInfo.PhoneNumber, newEmail));
-    }
+        if (!lead.ContactInfo.Email.Equals(newEmail))
+        {
+            await PreventDuplicateEmail(newEmail);
+        }
 
-    public async Task ChangePhone(Lead lead, string newPhone)
+        lead.ChangeEmail(newEmail);
+    }
+    public async Task ChangePhoneAsync(Lead lead, string newPhone)
     {
         Check.NotNull(lead, nameof(lead));
         Check.NotNullOrWhiteSpace(newPhone, nameof(newPhone));
-        
-        await PreventDuplicateEmailAndPhone([EmailPlaceHolder, newPhone]);
-        
-        lead.UpdateContacts(new ContactInfo(lead.ContactInfo.PhoneNumber, newPhone));
+
+        if (!lead.ContactInfo.PhoneNumber.Equals(newPhone))
+        {
+            await PreventDuplicatePhone(newPhone);   
+        }
+        lead.ChangePhoneNumber(newPhone);
+    }
+    public async Task ChangeContactInfoAsync(Lead lead, ContactInfo contactInfo)
+    {
+        await ChangeEmailAsync(lead, contactInfo.Email);
+        await ChangePhoneAsync(lead, contactInfo.PhoneNumber);
     }
 }

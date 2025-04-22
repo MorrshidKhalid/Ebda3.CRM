@@ -10,7 +10,7 @@
 <abp-dynamic-form abp-model="ContactViewModel"
                   asp-page="/Contacts/EditContactModal">
     <abp-modal>
-        <abp-modal-header title="@Model.Id"></abp-modal-header>
+        <abp-modal-header title="User: @Model.ContactViewModel.Email"></abp-modal-header>
         <abp-modal-body>
             <abp-input asp-for="Id" />
             <abp-form-content/>

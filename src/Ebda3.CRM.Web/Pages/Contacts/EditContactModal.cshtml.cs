@@ -28,8 +28,14 @@ public class EditContactModal : CRMPageModel
 
     public async Task OnGetAsync()
     {
-        ContactViewModel = ObjectMapper.Map<LeadDto, CreateEditContactsViewModel>(
-            await _leadAppService.FindLeadDtoAsync(Id));
+        var leadDto = await _leadAppService.FindLeadDtoAsync(Id); 
+        ContactViewModel = ObjectMapper.Map<LeadDto, CreateEditContactsViewModel>(leadDto);
+        ContactViewModel.Email = leadDto.ContactInfo.Email;
+        ContactViewModel.Phone = leadDto.ContactInfo.PhoneNumber;
+        ContactViewModel.Street = leadDto.Address.Street;
+        ContactViewModel.City = leadDto.Address.City;
+        ContactViewModel.State = leadDto.Address.State;
+        ContactViewModel.ZipCode = leadDto.Address.ZipCode;   
     }
 
     public async Task<IActionResult> OnPostAsync()
@@ -45,21 +51,3 @@ public class EditContactModal : CRMPageModel
         return NoContent();
     }
 }
-
-/*
- * new CreateEditContactsViewModel()
-        {
-            FirstName = "John",
-            LastName = "Doe",
-            Email = "john.doe@mail.com",
-            Phone = "021555145",
-            Street = "123 Main Street",
-            City = "London",
-            State = "London",
-            ZipCode = "00000",
-            Camponey = "John Doe",
-            Industry = "Software Engineering",
-            Source = LeadSource.Ads,
-            Status = LeadStatus.Approved
-        };
-*/
